@@ -60,7 +60,7 @@ PROJECT-PATH is added as the last option."
         (let ((epc-process
                (epc:start-epc
                 nim-nimsuggest-path
-                (nimsuggest-get-options file))))
+                (nimsuggest-get-options (or (nim-get-project-root) file)))))
           (push (cons file epc-process) nim-epc-processes-alist)
           epc-process))))
 

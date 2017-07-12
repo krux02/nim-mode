@@ -66,9 +66,10 @@ The config file would one of those: config.nims, PROJECT.nim.cfg, or nim.cfg."
 
 (defun nim-get-project-root ()
   "Return project directory."
-  (file-name-directory
-   (nim-find-file-in-heirarchy
-    (file-name-directory (buffer-file-name)) nim-project-root-regex)))
+  (let ((project-file
+        (nim-find-file-in-heirarchy
+         (file-name-directory (buffer-file-name)) nim-project-root-regex)))
+    (and project-file (file-name-directory project-file))))
 
 ;; Compile command support
 (require 'compile)
