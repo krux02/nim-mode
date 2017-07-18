@@ -137,6 +137,8 @@
     (define-key nim-mode-map [remap delete-backward-char] 'nim-electric-backspace))
 
 
+  (setq-local nim-project-root (nim-get-project-root))
+
   ;; Set `compile-command' to the correct initial value
   (nim-compile--set-compile-command))
 
@@ -333,7 +335,7 @@ Argument ARG is ignored."
 ;; add the regular expression to the list of available regular expressions with the symbol nim
 (add-to-list
  'compilation-error-regexp-alist-alist
- '(nim "^\\([[:alnum:]\\/_.-]*\\.nims?\\)(\\([[:digit:]]*\\)\\(?:, ?\\([[:digit:]]*\\)\\)?)\\( \\(?:Warning\\)\\|\\(?:Hint\\):\\)?\\(template/generic instantiation from here\\)?\\(?: Error\\)?" 1 2 3 (4 . 5)))
+ '(nim "^\\([[:alnum:]\\/_.-]*\\.nims?\\)(\\([[:digit:]]*\\)\\(?:, ?\\([[:digit:]]*\\)\\)?)\\( \\(?:Warning\\)\\|\\(?:Hint\\):\\)?\\( template/generic instantiation from here\\)?\\(?: Error\\)?" 1 2 3 (4 . 5)))
 ;; capf
 (autoload 'nim-capf-setup "nim-capf")
 

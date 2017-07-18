@@ -589,5 +589,8 @@ which supports ‘chk’ option for EPC.")
   "Set nil if you really don’t want to use flycheck-nimsuggest.
 Mainly this variable is debug purpose.")
 
+(defvar nim-project-root nil
+  "Nimsuggest needs a project root parameter, this is the project root parameter.")
+
 (provide 'nim-vars)
 ;;; nim-vars.el ends here
