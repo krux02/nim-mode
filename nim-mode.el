@@ -137,7 +137,7 @@
     (define-key nim-mode-map [remap delete-backward-char] 'nim-electric-backspace))
 
 
-  (setq-local nim-project-root (nim-get-project-root))
+  (setq-local nimsuggest-project-file (nim-get-project-root))
 
   ;; Set `compile-command' to the correct initial value
   (nim-compile--set-compile-command))

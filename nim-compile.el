@@ -64,12 +64,13 @@ The config file would one of those: config.nims, PROJECT.nim.cfg, or nim.cfg."
   :type 'string
   :group 'nim)
 
+
 (defun nim-get-project-root ()
-  "Return project directory."
-  (let ((project-file
-        (nim-find-file-in-heirarchy
-         (file-name-directory (buffer-file-name)) nim-project-root-regex)))
-    (and project-file (file-name-directory project-file))))
+  "Try to automatically infer the project file."
+  (let*
+      ((buffer-dir (file-name-directory (buffer-file-name)))
+       (project-file (nim-find-file-in-heirarchy buffer-dir nim-project-root-regex)))
+    (or project-file (buffer-file-name))))
 
 ;; Compile command support
 (require 'compile)
