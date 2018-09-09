@@ -89,6 +89,10 @@ PROJECT-PATH is added as the last option."
                 ;;   '("--define:nimscript" "--define:nimconfig"))
                 (list "--epc" project-path))))
 
+
+(defvar nimsuggest-project-file nil
+  "Nimsuggest needs a project file parameter.")
+
 (defun nimsuggest--find-or-create-epc ()
   "Get the epc responsible for the current buffer."
   (let ((file buffer-file-name))
@@ -100,7 +104,7 @@ PROJECT-PATH is added as the last option."
         (let ((new-epc
                (epc:start-epc
                 nimsuggest-path
-                (nimsuggest-get-options file))))
+                (nimsuggest-get-options (or nimsuggest-project-file file)))))
           (nim-log "nimsuggest: new EPC process created\n - %s" new-epc)
           (push (cons file new-epc) nimsuggest--epc-processes-alist)
           new-epc))))
