@@ -35,7 +35,7 @@
   `((,(nim-rx (or line-start ";") (* " ")
               defun  (+ " ")
               (group (or identifier quoted-chars) (* " ") (? (group "*"))))
-     (1 (if (match-string 2)
+     (1 (if (match-beginning 2)
             'nim-font-lock-export-face
           font-lock-function-name-face)
         keep t)
@@ -52,7 +52,7 @@
     (,(nim-rx (or line-start ";") (* " ")
               (or "var" "let" "const" "type") (+ " ")
               (group (or identifier quoted-chars) (* " ") (? (group "*"))))
-     . (1 (if (match-string 2)
+     . (1 (if (match-beginning 2)
               'nim-font-lock-export-face
             font-lock-variable-name-face))))
   "Font lock expressions for Nim mode.")
@@ -185,7 +185,7 @@ is used to limit the scan."
 (defun nim-syntax-stringify ()
   "Put `syntax-table' property correctly on single/triple double quotes."
   (unless (nth 4 (syntax-ppss))
-    (let* ((num-quotes (length (match-string-no-properties 1)))
+    (let* ((num-quotes (- (match-end 1) (match-beginning 1)))
            (ppss (prog2
                      (backward-char num-quotes)
                      (syntax-ppss)
@@ -268,7 +268,7 @@ is used to limit the scan."
                       (when (nth 8 ppss)
                         (goto-char (nth 8 ppss))
                         (looking-at "##?\\[")
-                        (length (match-string 0))))))
+                        (- (match-end 0) (match-beginning 0))))))
     (cond
      ;; single line comment
      ((and (eq nil (nth 4 ppss)) (eq 1 (length hash)))

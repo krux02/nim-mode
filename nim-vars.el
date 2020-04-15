@@ -340,8 +340,8 @@ for easy updating.")
     "pointer" "typedesc" "void" "auto" "any" "sink" "lent"
     "untyped" "typed" "range" "array" "openArray" "varargs" "seq" "set" "byte"
     ;; c interop types
-    "cchar" "cschar" "cshort" "cint" "clong" "clonglong" "cfloat" "cdouble"
-    "cstring" "clongdouble" "cstringArray")
+    "cchar" "cuchar" "cschar" "cshort" "cushort" "cint" "cuint" "clong" "culong" "clonglong" "culonglong" "cfloat" "cdouble"
+    "cstring" "clongdouble" "cstringArray" "csize" "csize_t")
   "Nim types defined in <lib/system.nim>.")
 
 (defconst nim-exceptions
@@ -449,10 +449,13 @@ But all those functions can not use in NimScript.")
   '(("deprecated" .
      ("deprecate a symbol"
       "[OLD: NEW, ...] -- deprecate symbols"))
+    ("discardable" .
+     "used to mark a proc where the return value may be implicitly discarded")
     ("noSideEffect" .
      "used to mark a proc/iterator to have no side effects")
     ("procvar" .
      "used to mark a proc that it can be passed to a procedural variable.")
+    ("constructor" . "used to mark an imported proc as a wrapped constructor")
     ("destructor" .
      "used to mark a proc to act as a type destructor. [duplicated]")
     ("compileTime" .
